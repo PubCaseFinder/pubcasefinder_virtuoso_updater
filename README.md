@@ -21,7 +21,7 @@ vi .env
 ```
 
 ### 2. Building Containers  
-Build the required Docker images for each environment. Note that the MySQL build requires local user IDs for volume permission consistency.
+Build the required Docker images for each environment. 
 
 ```bash
 docker compose build virtuoso
