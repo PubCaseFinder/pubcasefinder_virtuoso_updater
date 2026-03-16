@@ -2,8 +2,8 @@
 
 ## Overview
 
-* This repository is required for updating the Virtuoso data used in the NanbyoData.
-* For the NanbyoData MySQL update tool, please refer to [this link](https://github.com/PubCaseFinder/pubcasefinder_updater/).
+* This repository is required for updating the Virtuoso data used in the PubCaseFinder.
+* For the PubCaseFinder MySQL update tool, please refer to [this link](https://docs.google.com/spreadsheets/d/1Mi7VOu7Ye6K5CWXbYOl2g46yuMOJuSqoJoiT8gq5T0c/edit?gid=395055673#gid=395055673).
 
 ## Prerequisites
 
