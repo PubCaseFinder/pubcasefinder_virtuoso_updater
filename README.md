@@ -35,6 +35,6 @@ docker compose up -d
 ---
 ## Operations
 The procedure for updating Virtuoso data is as follows:  
-* https://docs.google.com/spreadsheets/d/1Mi7VOu7Ye6K5CWXbYOl2g46yuMOJuSqoJoiT8gq5T0c/edit?gid=983984758#gid=983984758
+* https://docs.google.com/spreadsheets/d/1Mi7VOu7Ye6K5CWXbYOl2g46yuMOJuSqoJoiT8gq5T0c/edit?gid=983984758#gid=983984758  
 [!IMPORTANT]  
 If you are unable to access the documentation links above, please contact the DBCLS team.  
