@@ -1,1 +1,41 @@
 # pubcasefinder_virtuoso_updater
+
+## Overview
+
+* This repository is required for updating the Virtuoso data used in the PubCaseFinder.
+* For the PubCaseFinder MySQL update tool, please refer to [this link](https://docs.google.com/spreadsheets/d/1Mi7VOu7Ye6K5CWXbYOl2g46yuMOJuSqoJoiT8gq5T0c/edit?gid=395055673#gid=395055673).
+
+## Prerequisites
+
+* **Docker** / **Docker Compose**
+
+## Setup & Usage
+
+### 1. Environment Configuration
+
+Initialize your environment variables by copying the template file and editing it with your local settings.
+
+```bash
+cp template.env .env
+vi .env
+```
+
+### 2. Building Containers  
+Build the required Docker images for each environment. 
+
+```bash
+docker compose build virtuoso
+```
+
+### 3. Execution
+Start the container with the following command:  
+```bash
+docker compose up -d
+```
+---
+## Operations
+The procedure for updating Virtuoso data is as follows:  
+* https://docs.google.com/spreadsheets/d/1Mi7VOu7Ye6K5CWXbYOl2g46yuMOJuSqoJoiT8gq5T0c/edit?gid=983984758#gid=983984758  
+
+[!IMPORTANT]  
+If you are unable to access the documentation links above, please contact the DBCLS team.  
