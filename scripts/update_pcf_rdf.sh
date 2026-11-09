@@ -2,6 +2,8 @@
 
 source /scripts/update_data.sh
 
+bash /scripts/check_pcf_rdf_files.sh || exit 1
+
 GRAPH_NAME='https://pubcasefinder.dbcls.jp/rdf/pcf'
 
 isql_exec "DELETE FROM DB.DBA.LOAD_LIST WHERE ll_graph ='${GRAPH_NAME}';"

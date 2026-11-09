@@ -1,7 +1,7 @@
 #!/bin/bash
 
 isql_exec() {
-  /opt/virtuoso-opensource/bin/isql 1111 dba dba "exec=$1"
+  /opt/virtuoso-opensource/bin/isql 1111 dba "${DBA_PASSWORD:?DBA_PASSWORDを設定してください}" "exec=$1"
 }
 
 isql_prepare_virtuoso_load() {

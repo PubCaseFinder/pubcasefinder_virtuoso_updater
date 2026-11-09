@@ -22,13 +22,13 @@ declare -A graph_names=(
     ["pubchem"]="https://pubcasefinder.dbcls.jp/pubchem"
 )
 
-declare -A load_files=(
-    ["go"]="'/rdf_data/pcf/ontologies/go/latest', '*.owl', 'https://pubcasefinder.dbcls.jp/go'"
-    ["hp"]="'/rdf_data/pcf/ontologies/hp/latest', '*.owl', 'https://pubcasefinder.dbcls.jp/rdf/ontology/hp'"
-    ["medgen"]="'/rdf_data/pcf/ontologies/medgen/latest', '*.ttl', 'https://pubcasefinder.dbcls.jp/rdf/ontology/medgen'"
-    ["mondo"]="'/rdf_data/pcf/ontologies/mondo/latest', '*.owl', 'https://pubcasefinder.dbcls.jp/rdf/ontology/mondo'"
-    ["nando"]="'/rdf_data/pcf/ontologies/nando/latest', '*.ttl', 'https://pubcasefinder.dbcls.jp/rdf/ontology/nando'"
-    ["pubchem"]="'/rdf_data/pcf/ontologies/pubchem/latest', '*.*', 'https://pubcasefinder.dbcls.jp/pubchem'"
+declare -A file_patterns=(
+    ["go"]='*.owl'
+    ["hp"]='*.owl'
+    ["medgen"]='*.ttl'
+    ["mondo"]='*.owl'
+    ["nando"]='*.ttl'
+    ["pubchem"]='*.*'
 )
 
 declare -A data_dirs=(
@@ -48,10 +48,11 @@ fi
 
 has_data_file() {
     local dir=$1
+    local pattern=$2
     local file
 
     for file in "$dir"/*; do
-        if [[ -f $file ]]; then
+        if [[ ${file##*/} == $pattern && -f $file && -r $file && -s $file ]]; then
             return 0
         fi
     done
@@ -70,13 +71,13 @@ for data in "${load_data[@]}"; do
         exit 2
     fi
 
-    if ! has_data_file "${data_dirs[$data]}"; then
-        echo "ファイルが存在しません: ${data_dirs[$data]}/*" >&2
+    if ! has_data_file "${data_dirs[$data]}" "${file_patterns[$data]}"; then
+        echo "読み取り可能で空でない対象ファイルが存在しません: ${data_dirs[$data]}/${file_patterns[$data]}" >&2
         exit 1
     fi
 done
 
 for data in "${load_data[@]}"; do
-    isql_load_virtuoso "${graph_names[$data]}" "${load_files[$data]}"
+    isql_load_virtuoso "${graph_names[$data]}" "'${data_dirs[$data]}', '${file_patterns[$data]}', '${graph_names[$data]}'"
 done
 
