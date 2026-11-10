@@ -78,6 +78,8 @@ for data in "${load_data[@]}"; do
 done
 
 for data in "${load_data[@]}"; do
-    isql_load_virtuoso "${graph_names[$data]}" "'${data_dirs[$data]}', '${file_patterns[$data]}', '${graph_names[$data]}'"
+    printf '=============== loading %s ===============\n' "$data"
+    isql_load_virtuoso "${graph_names[$data]}" "'${data_dirs[$data]}', '${file_patterns[$data]}', '${graph_names[$data]}'" || exit $?
+    printf '=============== finish loading %s ===============\n' "$data"
 done
 
