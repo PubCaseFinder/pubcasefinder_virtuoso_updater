@@ -1,0 +1,23 @@
+#!/bin/bash
+
+isql_exec() {
+  /opt/virtuoso-opensource/bin/isql 1111 dba "${DBA_PASSWORD:?DBA_PASSWORDを設定してください}" "exec=$1"
+}
+
+isql_prepare_virtuoso_load() {
+    local graph=$1
+    local file=$2
+    isql_exec "DELETE FROM DB.DBA.LOAD_LIST WHERE ll_graph ='${graph}';" || return $?
+    isql_exec "log_enable(2,1); SPARQL CLEAR GRAPH <${graph}>;" || return $?
+    isql_exec "log_enable(2,1); ld_dir_all(${file});"
+}
+
+isql_run_virtuoso_load() {
+    isql_exec "rdf_loader_run();" || return $?
+    isql_exec "checkpoint;"
+}
+
+isql_load_virtuoso() {
+    isql_prepare_virtuoso_load "$1" "$2" || return $?
+    isql_run_virtuoso_load
+}
